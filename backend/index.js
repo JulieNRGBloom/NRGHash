@@ -65,7 +65,7 @@ app.use((err, req, res, next) => {
 });
 
 // Server and Socket.io Setup
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 const server = http.createServer(app);
 
 const io = new SocketIOServer(server, {
