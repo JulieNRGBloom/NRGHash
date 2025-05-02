@@ -1,0 +1,5 @@
+{"level":"info","message":"Subscription Monitor: Starting periodic check...","timestamp":"2025-01-13T02:53:23.765Z"}
+{"level":"error","message":"Subscription Monitor Error: column \"remaining_days\" of relation \"subscriptions\" does not exist","timestamp":"2025-01-13T02:53:23.893Z"}
+{"level":"info","message":"Subscription Monitor: Starting periodic check...","timestamp":"2025-01-13T03:00:23.093Z"}
+{"level":"error","message":"Subscription Monitor Error: column \"remaining_days\" of relation \"subscriptions\" does not exist","timestamp":"2025-01-13T03:00:23.179Z"}
+{"level":"info","message":"Subscription Monitor: Starting periodic check...","timestamp":"2025-01-13T03:18:10.780Z"}

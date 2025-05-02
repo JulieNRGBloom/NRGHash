@@ -1,0 +1,4 @@
+Retrieving logs...
+Logs were saved to /Users/xbtsupernode/Documents/nrg_hash V3/backend/.elasticbeanstalk/logs/250428_214842
+Logs were saved to /Users/xbtsupernode/Documents/nrg_hash V3/backend/.elasticbeanstalk/logs/250428_214842
+Updated symlink at /Users/xbtsupernode/Documents/nrg_hash V3/backend/.elasticbeanstalk/logs/latest
