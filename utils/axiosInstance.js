@@ -3,14 +3,17 @@ import { Alert } from 'react-native';
 import storage from '../storage';
 import Constants from 'expo-constants';
 
-console.log('💥 API URL is:', Constants.expoConfig.extra.apiUrl);
+// Grab the prod URL from app.config.js → Constants.expoConfig.extra.apiUrl
+const PROD = Constants.expoConfig.extra.apiUrl;
+// When running via `expo start` __DEV__ will be true
+const LOCAL = 'http://localhost:8080';
 
-const { apiUrl } = Constants.expoConfig.extra;
+const baseURL = __DEV__ ? `${LOCAL}/api` : `${PROD}/api`;
 
-// Create an Axios instance with your base URL
-const axiosInstance = axios.create({
-  baseURL: `${apiUrl}/api`,
-});
+console.log(`⚡️ axios baseURL = ${baseURL} (__DEV__=${__DEV__})`);
+
+const axiosInstance = axios.create({ baseURL });
+
 
 // Request interceptor: Attach access token to every request
 axiosInstance.interceptors.request.use(

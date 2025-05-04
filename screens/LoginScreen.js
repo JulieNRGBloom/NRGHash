@@ -1,6 +1,6 @@
 // screens/LoginScreen.js
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   View, 
   Text, 
@@ -20,6 +20,7 @@ function LoginScreen({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const passwordInputRef = useRef(null);
 
   const navigation = useNavigation();
 
@@ -90,16 +91,23 @@ function LoginScreen({ setIsLoggedIn }) {
             value={username}
             onChangeText={setUsername}
             autoCapitalize="none"
+            returnKeyType="next"  
+            onSubmitEditing={() => {               
+                  passwordInputRef.current?.focus();
+                }}
           />
 
           <Text style={styles.label}>Password</Text>
           <TextInput
+            ref={passwordInputRef}
             style={styles.input}
             placeholder="Enter your password"
             placeholderTextColor="#6B7280"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            returnKeyType="done"
+            onSubmitEditing={handleLogin} 
           />
 
           {/* Sign in button or loading indicator */}

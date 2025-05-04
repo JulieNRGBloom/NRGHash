@@ -4,7 +4,8 @@ import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
+import 'dotenv-flow/config';
 import usersRoutes from './routes/users.js';
 import miningRoutes from './routes/mining.js';
 import subscriptionRoutes from './routes/subscriptions.js';
@@ -20,7 +21,18 @@ import { startPriceMonitoring, setSocketIO } from './services/priceMonitor.mjs';
 import { startSubscriptionMonitoring, setSocketIO as setSubscriptionSocketIO } from './services/subscriptionMonitor.mjs'; // Import the subscription monitor
 import { setNotificationSocketIO } from './controllers/notificationController.js';
 
-dotenv.config();
+
+// dotenv.config();
+
+const b64 = process.env.JWT_SECRET_BASE64;
+if (!b64) {
+  console.error('⚠️  Missing JWT_SECRET_BASE64 in .env');
+  process.exit(1);
+}
+process.env.JWT_SECRET = Buffer.from(b64, 'base64').toString('utf8');
+
+console.log('🔬 NODE_ENV:', process.env.NODE_ENV);
+console.log('🔬 PG_HOST:', process.env.PG_HOST);
 
 const app = express();
 
