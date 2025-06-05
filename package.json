@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build:web": "expo build:web",
-    "start": "node index.js"
+    "start": "node backend/index.js"
   },
   "dependencies": {
     "@expo-google-fonts/ubuntu": "^0.2.3",
