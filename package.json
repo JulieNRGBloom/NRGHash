@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "expo start",
+    "dev": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:web": "expo build:web",
+    "start": "node server.js"
   },
   "dependencies": {
     "@expo-google-fonts/ubuntu": "^0.2.3",
