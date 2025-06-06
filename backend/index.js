@@ -19,6 +19,8 @@ import { setInterruptionSocketIO } from './controllers/interruptionController.js
 import { startPriceMonitoring, setSocketIO } from './services/priceMonitor.mjs';
 import { startSubscriptionMonitoring, setSocketIO as setSubscriptionSocketIO } from './services/subscriptionMonitor.mjs'; // Import the subscription monitor
 import { setNotificationSocketIO } from './controllers/notificationController.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
@@ -41,9 +43,16 @@ app.get('/health', (req, res) => {
   res.sendStatus(200);
 });
 
-app.get('/', (_req, res) => {
-  res.send('OK');
-});
+
+// ----------  STATIC WEB BUNDLE  ----------
+// Needed because you're using ES-modules:
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
+ 
+// 1️⃣ Serve everything inside /dist  (produced by Expo export)
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+ 
+
 
 // API Route Setup
 app.use('/api/users', usersRoutes);
@@ -56,6 +65,17 @@ app.use('/api/notifications', notificationRoutes); // ✅ Add this line
 app.use('/api/interruptions', interruptionsRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/hashrate', hashrateRoutes);
+
+// 2️⃣ Single-Page-App fallback:
+// app.get('*', (req, res, next) => {
+//   if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
+//     return next();            // let API & Socket-IO continue
+//   }
+//   res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+// });
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
 
 
 // Error Handling Middleware
